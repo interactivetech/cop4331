@@ -1,0 +1,86 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#0099cc"
+    android:baselineAligned="false"
+    android:orientation="horizontal">
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight=".6">
+	    <ImageView
+	        android:id="@+id/map_image"
+	        android:contentDescription='@string/menu_map'
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent"
+			android:src="@drawable/map"
+			android:scaleType="fitXY"
+			/>
+	    <Button
+	        android:id="@+id/items_link"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content" 
+	        android:layout_gravity="left|bottom"
+	        android:text="@string/items"
+	        />
+    </FrameLayout>
+	<LinearLayout
+        android:id="@+id/fullscreen_content_controls"
+        style="?buttonBarStyle"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight=".4"
+        android:layout_gravity="bottom|center_horizontal"
+        android:background="@color/black_overlay"
+        android:orientation="vertical"
+        tools:ignore="UselessParent" >
+	    <LinearLayout
+	        android:id="@+id/encounters"
+	        android:layout_width="match_parent"
+        	android:layout_height="0dp"
+        	android:layout_weight=".5"
+        	android:layout_margin="10dp"
+        	android:orientation="vertical">
+			<TextView
+		        android:id="@+id/notifications_title"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+        		android:background="#0099cc"
+		        android:text="@string/notifications"
+		        android:textColor="#33b5e5"
+		        android:textSize="15sp"
+		        android:textStyle="bold" />
+	    	<ListView
+	    	    android:id="@+id/notifications_items"
+	    	    android:layout_width="wrap_content"
+	    	    android:layout_height="wrap_content"
+	    	    android:background="@color/white_overlay" >
+	        </ListView>
+        </LinearLayout>
+        <LinearLayout
+	        android:id="@+id/index"
+	        android:layout_width="match_parent"
+        	android:layout_height="0dp"
+        	android:layout_weight=".5"
+        	android:layout_margin="10dp"
+        	android:orientation="vertical">    
+			<TextView
+		        android:id="@+id/index_title"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+        		android:background="#0099cc"
+		        android:text="@string/index"
+		        android:textColor="#33b5e5"
+		        android:textSize="15sp"
+		        android:textStyle="bold" />
+	        <ListView
+	            android:id="@+id/index_items"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:background="@color/white_overlay" >
+   
+		    </ListView>
+		</LinearLayout>
+    </LinearLayout>
+</LinearLayout>
