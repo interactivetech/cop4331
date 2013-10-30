@@ -1,0 +1,14 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#0099cc">
+    <TextView
+        android:id="@+id/gameplay_placeholder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+   		android:background="#0099cc"
+        android:text="@string/gameplay"
+        android:textColor="#33b5e5"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+</FrameLayout>

@@ -27,9 +27,12 @@ public class PocketMonsters extends Application{
 		}
 		editor.putString("item", items);
 		
-		String monsters = "1,@drawable/monsters1.png,[];"
-						+ "2,@drawable/monsters5.png,[];"
-						+ "3,@drawable/monsters10.png,[];";
+		String monsters = "1,monster1,@drawable/monsters1.png,attack;"
+						+ "2,monster2,@drawable/monsters5.png,attack;"
+						+ "3,monster3,@drawable/monsters10.png,attack;"
+						+ "4,monster4,@drawable/monsters1.png,attack;"
+						+ "5,monster5,@drawable/monsters5.png,attack;"
+						+ "6,monster6,@drawable/monsters10.png,attack;";
 		editor.putString("monster", monsters);
 		
 		String[] monster_array = monsters.split(";");
@@ -37,18 +40,17 @@ public class PocketMonsters extends Application{
 		int monster_num = 0;
 		for( String each_monster : monster_array ){
 			String[] attributes = each_monster.split(",");
-			int[] int_array = {};
 			monster_index[monster_num] = new Monster(
 					Integer.parseInt(attributes[0]),
-					attributes[1],int_array);
+					attributes[1],attributes[2],attributes[3]);
 			monster_num++;
 		}
 		
 		String encounters = "";
-		int encounter_num = 8;
+		int encounter_num = 5;
 		for( int i=1; i<=encounter_num; i++){
 			int level = (int) (5 + (Math.random() * (20 - 5)));
-			encounters += i + ","+i + ","+i%3 +","+level + ","+monster_index[i%3].image+";";
+			encounters += i + ","+i + ","+i%6 +","+level + ","+monster_index[i%6].image+";";
 		}
 		editor.putString("encounter", encounters);
 		

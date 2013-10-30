@@ -17,7 +17,7 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class NotificationsActivity extends Activity{
+public class EncountersActivity extends Activity{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
@@ -78,9 +78,9 @@ public class NotificationsActivity extends Activity{
     	public View getView(int position, View convertView, ViewGroup parent ){
     		View view = convertView;
     		if (view == null){
-    			view = inflater.inflate(R.layout.notifications_list_item, null);
+    			view = inflater.inflate(R.layout.encounters_list_item, null);
     		}
-    		TextView text = (TextView) view.findViewById(R.id.item_name);
+    		TextView text = (TextView) view.findViewById(R.id.encounter_name);
     		text.setText(""+encounters[position].monster_id);
     		
     		text.setOnTouchListener(new OnTouchListener() {

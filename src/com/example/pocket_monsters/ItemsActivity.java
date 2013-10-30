@@ -1,6 +1,6 @@
 package com.example.pocket_monsters;
 
-import com.example.pocket_monsters.MainActivity.Debug;
+import com.example.pocket_monsters.LoginActivity.Debug;
 
 import android.app.Activity;
 import android.content.Context;

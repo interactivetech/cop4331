@@ -6,7 +6,7 @@
 	android:orientation="horizontal">
    
     <TextView
-        android:id="@+id/item_name"
+        android:id="@+id/encounter_name"
      	android:layout_width="wrap_content"
      	android:layout_height="wrap_content"
      	android:layout_weight=".3"
@@ -15,15 +15,16 @@
      	android:textStyle="italic"
 		android:padding="20dp"/>
     <Button
-        android:id="@+id/item_use"
-        android:layout_width="wrap_content"
+        android:id="@+id/encounter_lock"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight=".2" 
-        android:text="@string/use"/>
+        android:text="@string/lock"/>
     <Button
-        android:id="@+id/item_drop"
-        android:layout_width="wrap_content"
+        android:id="@+id/encounter_run"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight=".2"
-        android:text="@string/drop"/>
+        android:text="@string/run"/>
+    
  </LinearLayout>

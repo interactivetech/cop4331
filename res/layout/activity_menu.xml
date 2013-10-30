@@ -52,7 +52,7 @@
 		        android:textSize="15sp"
 		        android:textStyle="bold" />
 	    	<ListView
-	    	    android:id="@+id/notifications_items"
+	    	    android:id="@+id/notification_items"
 	    	    android:layout_width="wrap_content"
 	    	    android:layout_height="wrap_content"
 	    	    android:background="@color/white_overlay" >
