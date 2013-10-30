@@ -3,7 +3,8 @@
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:background="@color/black_overlay"
-	android:orientation="horizontal">
+	android:orientation="horizontal"
+	android:padding="10dp">
    
     <TextView
         android:id="@+id/item_name"
@@ -12,18 +13,21 @@
      	android:layout_weight=".3"
      	android:textColor="#33b5e5"
      	android:textSize="20sp"
-     	android:textStyle="italic"
-		android:padding="20dp"/>
+     	android:textStyle="italic"/>
     <Button
         android:id="@+id/item_use"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight=".2" 
-        android:text="@string/use"/>
+        android:background="@drawable/button"
+        android:text="@string/use"
+        android:padding="10dp"/>
     <Button
         android:id="@+id/item_drop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight=".2"
-        android:text="@string/drop"/>
+        android:background="@drawable/button"
+        android:text="@string/drop"
+        android:padding="10dp"/>
  </LinearLayout>

@@ -3,7 +3,8 @@
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:background="@color/black_overlay"
-	android:orientation="horizontal">
+	android:orientation="horizontal"
+	android:padding="10dp">
    
     <TextView
         android:id="@+id/encounter_name"
@@ -12,19 +13,22 @@
      	android:layout_weight=".3"
      	android:textColor="#33b5e5"
      	android:textSize="20sp"
-     	android:textStyle="italic"
-		android:padding="20dp"/>
+     	android:textStyle="italic"/>
     <Button
         android:id="@+id/encounter_lock"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight=".2" 
-        android:text="@string/lock"/>
+        android:layout_weight=".2"
+        android:background="@drawable/button" 
+        android:text="@string/lock"
+        android:padding="10dp"/>
     <Button
         android:id="@+id/encounter_run"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight=".2"
-        android:text="@string/run"/>
+        android:background="@drawable/button"
+        android:text="@string/run"
+        android:padding="10dp"/>
     
  </LinearLayout>

@@ -10,12 +10,15 @@
     <string name="items">Items</string>
     <string name="menu_map">map image for main menu</string>
     <string name="drop">Drop</string>
+    <string name="drop_desc">Drop Button</string>
     <string name="use">Use</string>
+    <string name="use_desc">Use Button</string>
     <string name="login_header">login</string>
     <string name="login_btn">Login</string>
     <string name="run">run</string>
     <string name="lock">Lock</string>
     <string name="activate">Activate</string>
+    <string name="location">Location</string>
     <string name="order">Order</string>
     <string name="gameplay">Game</string>
     <string name="stats">Stats</string>

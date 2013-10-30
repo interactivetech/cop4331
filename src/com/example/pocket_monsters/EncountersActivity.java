@@ -88,16 +88,17 @@ public class EncountersActivity extends Activity{
     			public boolean onTouch(View v, MotionEvent event) {
     		        switch(event.getAction()) {
 	    		       	case MotionEvent.ACTION_DOWN:
-	    		        	((View) v.getParent()).setBackgroundColor(getResources().getColor(R.color.white_overlay));
-	    	        		if( ((TextView) v).getText() == "Monster Index" ){
-	    	        			Intent myIntent = new Intent(v.getContext(), MenuActivity.class);
-	    		        		startActivity(myIntent);
-	    	        		}
+	    		       		((View) v.getParent()).setBackgroundColor(getResources().getColor(R.color.white_overlay));
 	    		            break;
 	    		        case MotionEvent.ACTION_UP:
+	    		        	((View) v.getParent()).setBackgroundColor(getResources().getColor(R.color.black_overlay));
+	    		        	Intent myIntent = new Intent(v.getContext(), GameActivity.class);
+    		        		startActivity(myIntent);
+    		        		break;
 	    		        case MotionEvent.ACTION_MOVE:
 	    		        case MotionEvent.ACTION_CANCEL:
 	    		        	((View) v.getParent()).setBackgroundColor(getResources().getColor(R.color.black_overlay));
+	    		        	break;
     		        }
     		        return true;
     		    }

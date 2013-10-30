@@ -23,11 +23,12 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int white_overlay=0x7f040001;
     }
     public static final class drawable {
-        public static final int ic_launcher=0x7f020000;
-        public static final int map=0x7f020001;
-        public static final int monsters1=0x7f020002;
-        public static final int monsters10=0x7f020003;
-        public static final int monsters5=0x7f020004;
+        public static final int button=0x7f020000;
+        public static final int ic_launcher=0x7f020001;
+        public static final int map=0x7f020002;
+        public static final int monsters1=0x7f020003;
+        public static final int monsters10=0x7f020004;
+        public static final int monsters5=0x7f020005;
     }
     public static final class id {
         public static final int encounter_lock=0x7f070012;
@@ -40,20 +41,21 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int index=0x7f07000c;
         public static final int indexList=0x7f070001;
         public static final int index_items=0x7f07000e;
-        public static final int index_quick_name=0x7f070017;
+        public static final int index_quick_name=0x7f070018;
         public static final int index_title=0x7f07000d;
         public static final int itemList=0x7f070004;
-        public static final int item_drop=0x7f07001a;
-        public static final int item_name=0x7f070018;
-        public static final int item_use=0x7f070019;
+        public static final int item_drop=0x7f07001b;
+        public static final int item_name=0x7f070019;
+        public static final int item_use=0x7f07001a;
         public static final int items_link=0x7f070008;
         public static final int login_btn=0x7f070006;
         public static final int login_msg=0x7f070005;
         public static final int map=0x7f070002;
         public static final int map_image=0x7f070007;
-        public static final int monster_activate=0x7f070015;
+        public static final int monster_activate=0x7f070016;
+        public static final int monster_location=0x7f070015;
         public static final int monster_name=0x7f070014;
-        public static final int monster_order=0x7f070016;
+        public static final int monster_order=0x7f070017;
         public static final int notificationList=0x7f07000f;
         public static final int notification_items=0x7f07000b;
         public static final int notifications_title=0x7f070003;
@@ -74,25 +76,28 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int items_list_item=0x7f03000c;
     }
     public static final class string {
-        public static final int activate=0x7f05000e;
+        public static final int activate=0x7f050010;
         public static final int app_name=0x7f050000;
         public static final int deck=0x7f050004;
-        public static final int description=0x7f050012;
+        public static final int description=0x7f050015;
         public static final int drop=0x7f050008;
-        public static final int gameplay=0x7f050010;
+        public static final int drop_desc=0x7f050009;
+        public static final int gameplay=0x7f050013;
         public static final int index=0x7f050003;
         public static final int items=0x7f050006;
-        public static final int lock=0x7f05000d;
-        public static final int login_btn=0x7f05000b;
-        public static final int login_header=0x7f05000a;
+        public static final int location=0x7f050011;
+        public static final int lock=0x7f05000f;
+        public static final int login_btn=0x7f05000d;
+        public static final int login_header=0x7f05000c;
         public static final int main_menu=0x7f050001;
         public static final int map=0x7f050002;
         public static final int menu_map=0x7f050007;
         public static final int notifications=0x7f050005;
-        public static final int order=0x7f05000f;
-        public static final int run=0x7f05000c;
-        public static final int stats=0x7f050011;
-        public static final int use=0x7f050009;
+        public static final int order=0x7f050012;
+        public static final int run=0x7f05000e;
+        public static final int stats=0x7f050014;
+        public static final int use=0x7f05000a;
+        public static final int use_desc=0x7f05000b;
     }
     public static final class style {
         /** 

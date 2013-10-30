@@ -150,12 +150,12 @@ public class MenuActivity extends Activity {
     		        switch(event.getAction()) {
 	    		       	case MotionEvent.ACTION_DOWN:
 	    		        	((View) v.getParent()).setBackgroundColor(getResources().getColor(R.color.white_overlay));
-	    	        		
-    	        			Intent myIntent = new Intent(v.getContext(), InfoActivity.class);
-    		        		startActivity(myIntent);
-	    	        		
 	    		            break;
 	    		        case MotionEvent.ACTION_UP:
+	    		        	((View) v.getParent()).setBackgroundColor(getResources().getColor(R.color.black_overlay));
+    	        			Intent myIntent = new Intent(v.getContext(), MapActivity.class);
+    		        		startActivity(myIntent);
+	    	        		break;
 	    		        case MotionEvent.ACTION_MOVE:
 	    		        case MotionEvent.ACTION_CANCEL:
 	    		        	((View) v.getParent()).setBackgroundColor(getResources().getColor(R.color.black_overlay));
@@ -210,12 +210,12 @@ public class MenuActivity extends Activity {
     		        switch(event.getAction()) {
 	    		       	case MotionEvent.ACTION_DOWN:
 	    		        	((View) v.getParent()).setBackgroundColor(getResources().getColor(R.color.white_overlay));
-	    	        		
-	    		        	Intent myIntent = new Intent(v.getContext(), GameActivity.class);
-	    		        	startActivity(myIntent);
-	    	        		
 	    		            break;
 	    		        case MotionEvent.ACTION_UP:
+	    		        	((View) v.getParent()).setBackgroundColor(getResources().getColor(R.color.black_overlay));
+	    		        	Intent myIntent = new Intent(v.getContext(), GameActivity.class);
+	    		        	startActivity(myIntent);
+	    		        	break;
 	    		        case MotionEvent.ACTION_MOVE:
 	    		        case MotionEvent.ACTION_CANCEL:
 	    		        	((View) v.getParent()).setBackgroundColor(getResources().getColor(R.color.black_overlay));

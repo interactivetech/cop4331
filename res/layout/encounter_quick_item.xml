@@ -7,10 +7,10 @@
    
     <TextView
         android:id="@+id/encounter_quick_name"
-     	android:layout_width="fill_parent"
+     	android:layout_width="match_parent"
      	android:layout_height="wrap_content"
      	android:textColor="#33b5e5"
-     	android:textSize="10sp"
+     	android:textSize="12sp"
      	android:textStyle="italic"
 		android:padding="10dp"/>
 </LinearLayout>
