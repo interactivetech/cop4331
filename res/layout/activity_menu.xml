@@ -20,9 +20,10 @@
 	    <Button
 	        android:id="@+id/items_link"
 	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content" 
-	        android:background="@drawable/button"
-	        android:padding="10sp" 
+	        android:layout_height="wrap_content"
+	        android:background="@drawable/button_clicks"
+	        android:padding="5sp"
+	        android:layout_margin="5sp"
 	        android:layout_gravity="left|bottom"
 	        android:text="@string/items"
 	        />
@@ -55,7 +56,7 @@
 		        android:textStyle="bold" />
 	    	<ListView
 	    	    android:id="@+id/notification_items"
-	    	    android:layout_width="wrap_content"
+	    	    android:layout_width="match_parent"
 	    	    android:layout_height="wrap_content"
 	    	    android:background="@color/white_overlay" >
 	        </ListView>
@@ -78,7 +79,7 @@
 		        android:textStyle="bold" />
 	        <ListView
 	            android:id="@+id/index_items"
-	            android:layout_width="wrap_content"
+	            android:layout_width="match_parent"
 	            android:layout_height="wrap_content"
 	            android:background="@color/white_overlay" >
    

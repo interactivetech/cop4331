@@ -21,6 +21,8 @@
     <string name="location">Location</string>
     <string name="order">Order</string>
     <string name="gameplay">Game</string>
+    <string name="gameplay_widget">Gameplay Widget</string>
     <string name="stats">Stats</string>
     <string name="description">Description</string>
+    <string name="info_image">Image</string>
 </resources>

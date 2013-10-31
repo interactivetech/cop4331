@@ -18,8 +18,9 @@
         android:id="@+id/item_use"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight=".2" 
-        android:background="@drawable/button"
+        android:layout_weight=".2"
+        android:layout_margin="1dp"
+        android:background="@drawable/button_clicks"
         android:text="@string/use"
         android:padding="10dp"/>
     <Button
@@ -27,7 +28,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight=".2"
-        android:background="@drawable/button"
+        android:layout_margin="1dp"
+        android:background="@drawable/button_clicks"
         android:text="@string/drop"
         android:padding="10dp"/>
  </LinearLayout>

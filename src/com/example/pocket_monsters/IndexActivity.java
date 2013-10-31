@@ -11,11 +11,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.View.OnTouchListener;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -32,7 +34,7 @@ public class IndexActivity extends Activity{
         for( String each_item : monster_array ){
         	String[] attributes = each_item.split(",");
         	index[i] = new Monster(Integer.parseInt(attributes[0]),
-        			attributes[1],attributes[2],attributes[3]);
+        			attributes[1],attributes[2],attributes[3],attributes[4]);
         	i++;
         }
         
@@ -52,6 +54,7 @@ public class IndexActivity extends Activity{
 	
 	public class IndexListAdapter extends BaseAdapter{
     	Monster[] index;
+    	String monster_image;
     	Context context;
     	private LayoutInflater inflater = null;
     	
@@ -85,6 +88,18 @@ public class IndexActivity extends Activity{
     		TextView text = (TextView) view.findViewById(R.id.monster_name);
     		text.setText(index[position].name);
     		
+    		this.monster_image = index[position].image;
+    		
+    		Button location = (Button) view.findViewById(R.id.monster_location);
+    		location.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					
+					Intent myIntent = new Intent(IndexActivity.this, MapActivity.class);
+			    	IndexActivity.this.startActivity(myIntent);
+				}
+    		});
+    		
     		text.setOnTouchListener(new OnTouchListener() {
     			@Override
     			public boolean onTouch(View v, MotionEvent event) {
@@ -95,6 +110,7 @@ public class IndexActivity extends Activity{
 	    		        case MotionEvent.ACTION_UP:
 	    		        	((View) v.getParent()).setBackgroundColor(getResources().getColor(R.color.black_overlay));
 	    		        	Intent myIntent = new Intent(v.getContext(), InfoActivity.class);
+	    		        	myIntent.putExtra("monster_img",monster_image);
     		        		startActivity(myIntent);
 	    		            break;
 	    		        case MotionEvent.ACTION_MOVE:

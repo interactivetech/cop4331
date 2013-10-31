@@ -38,7 +38,7 @@ public class MenuActivity extends Activity {
         for( String each_item : monster_array ){
         	String[] attributes = each_item.split(",");
         	index[i] = new Monster(Integer.parseInt(attributes[0]),
-        			attributes[1],attributes[2],attributes[3]);
+        			attributes[1],attributes[2],attributes[3],attributes[4]);
         	i++;
         }
         
@@ -50,7 +50,7 @@ public class MenuActivity extends Activity {
         for( String each_encounter : encounter_array ){
         	String[] attributes = each_encounter.split(",");
         	encounters[i] = new Encounter(Integer.parseInt(attributes[0]),
-        			Integer.parseInt(attributes[1]),Integer.parseInt(attributes[2]),
+        			index[i].location,index[i].name,
         			Integer.parseInt(attributes[3]),attributes[4]);
         	i++;
         }
@@ -202,7 +202,7 @@ public class MenuActivity extends Activity {
     			view = inflater.inflate(R.layout.encounter_quick_item, null);
     		}
     		TextView text = (TextView) view.findViewById(R.id.encounter_quick_name);
-    		text.setText(""+encounters[position].monster_id);
+    		text.setText(encounters[position].monster+" lvl:"+encounters[position].monster_level+" at "+encounters[position].location);
     		
     		text.setOnTouchListener(new OnTouchListener() {
     			@Override

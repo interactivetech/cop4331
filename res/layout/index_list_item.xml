@@ -19,7 +19,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight=".2"
-        android:background="@drawable/button" 
+        android:layout_margin="1dp"
+        android:background="@drawable/button_clicks" 
         android:text="@string/location"
         android:padding="10dp"/>
     <Button
@@ -27,7 +28,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight=".2"
-        android:background="@drawable/button" 
+        android:layout_margin="1dp"
+        android:background="@drawable/button_clicks" 
         android:text="@string/activate"
         android:padding="10dp"/>
     <Button
@@ -35,7 +37,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight=".1"
-        android:background="@drawable/button"
+        android:layout_margin="1dp"
+        android:background="@drawable/button_clicks"
         android:text="@string/order"
         android:padding="10dp"/>
  </LinearLayout>

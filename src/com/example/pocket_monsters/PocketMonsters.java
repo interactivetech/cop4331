@@ -27,12 +27,16 @@ public class PocketMonsters extends Application{
 		}
 		editor.putString("item", items);
 		
-		String monsters = "1,monster1,@drawable/monsters1.png,attack;"
-						+ "2,monster2,@drawable/monsters5.png,attack;"
-						+ "3,monster3,@drawable/monsters10.png,attack;"
-						+ "4,monster4,@drawable/monsters1.png,attack;"
-						+ "5,monster5,@drawable/monsters5.png,attack;"
-						+ "6,monster6,@drawable/monsters10.png,attack;";
+		String monsters = "1,monster1,location1,monsters1,attack;"
+						+ "2,monster2,location2,monsters5,attack;"
+						+ "3,monster3,location3,monsters10,attack;"
+						+ "4,monster4,location4,monsters1,attack;"
+						+ "5,monster5,location5,monsters5,attack;"
+						+ "6,monster6,location6,monsters10,attack;"
+						+ "7,monster7,location7,monsters1,attack;"
+						+ "8,monster8,location8,monsters5,attack;"
+						+ "9,monster9,location9,monsters10,attack;"
+						+ "10,monster10,location10,monsters1,attack;";
 		editor.putString("monster", monsters);
 		
 		String[] monster_array = monsters.split(";");
@@ -42,15 +46,16 @@ public class PocketMonsters extends Application{
 			String[] attributes = each_monster.split(",");
 			monster_index[monster_num] = new Monster(
 					Integer.parseInt(attributes[0]),
-					attributes[1],attributes[2],attributes[3]);
+					attributes[1],attributes[2],attributes[3],attributes[4]);
 			monster_num++;
 		}
 		
 		String encounters = "";
 		int encounter_num = 5;
+		int mod_num = monster_array.length;
 		for( int i=1; i<=encounter_num; i++){
 			int level = (int) (5 + (Math.random() * (20 - 5)));
-			encounters += i + ","+i + ","+i%6 +","+level + ","+monster_index[i%6].image+";";
+			encounters += i + ","+i + ","+i%mod_num +","+level + ","+monster_index[i%mod_num].image+";";
 		}
 		editor.putString("encounter", encounters);
 		
