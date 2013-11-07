@@ -30,9 +30,9 @@ public class EncountersActivity extends Activity{
         int i = 0;
         for( String each_item : monster_array ){
         	String[] attributes = each_item.split(",");
-        	index[i] = new Monster(Integer.parseInt(attributes[0]),
-        			attributes[1],attributes[2],attributes[3],attributes[4]);
-        	i++;
+        	//index[i] = new Monster(Integer.parseInt(attributes[0]),attributes[1],attributes[2],attributes[3],attributes[4]);
+        	index[i] = new Monster(attributes[1], " bio here", attributes[3], Integer.parseInt(attributes[0]), 1, 0, 30, 30, 5, 5, 5);
+        			i++;
         }
         
 		String encounter_dump = pref.getString("encounter", "not found");

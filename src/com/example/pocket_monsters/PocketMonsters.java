@@ -27,7 +27,7 @@ public class PocketMonsters extends Application{
 		}
 		editor.putString("item", items);
 		
-		String monsters = "1,monster1,location1,monsters1,attack;"
+		String monsters = "1,pegasus,location1,monsters1,attack;"
 						+ "2,monster2,location2,monsters5,attack;"
 						+ "3,monster3,location3,monsters10,attack;"
 						+ "4,monster4,location4,monsters1,attack;"
@@ -44,9 +44,8 @@ public class PocketMonsters extends Application{
 		int monster_num = 0;
 		for( String each_monster : monster_array ){
 			String[] attributes = each_monster.split(",");
-			monster_index[monster_num] = new Monster(
-					Integer.parseInt(attributes[0]),
-					attributes[1],attributes[2],attributes[3],attributes[4]);
+		//	monster_index[monster_num] = new Monster(Integer.parseInt(attributes[0]),attributes[1],attributes[2],attributes[3],attributes[4]);
+			monster_index[monster_num] = new Monster(attributes[1], " bio here", attributes[3], Integer.parseInt(attributes[0]), 1, 0, 30, 30, 5, 5, 5);
 			monster_num++;
 		}
 		

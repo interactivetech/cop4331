@@ -35,10 +35,11 @@ public class MenuActivity extends Activity {
         
         Monster[] index = new Monster[monster_array.length];
         int i = 0;
-        for( String each_item : monster_array ){
+        for( String each_item : monster_array ){ // creates monsters into index
         	String[] attributes = each_item.split(",");
-        	index[i] = new Monster(Integer.parseInt(attributes[0]),
-        			attributes[1],attributes[2],attributes[3],attributes[4]);
+        	//index[i] = new Monster(Integer.parseInt(attributes[0]),attributes[1],attributes[2],attributes[3],attributes[4]);
+        	index[i] = new Monster(attributes[1], " bio here", attributes[3], Integer.parseInt(attributes[0]), 1, 0, 30, 30, 5, 5, 5);
+
         	i++;
         }
         
@@ -63,15 +64,18 @@ public class MenuActivity extends Activity {
     	
       	setContentView(R.layout.activity_menu);
       	
-      	final ListView indexList = (ListView) findViewById(R.id.index_items);
+        // makes the list of monsters under index
+      	final ListView indexList = (ListView) findViewById(R.id.index_items); 
         final IndexQuickListAdapter index_adapter = new IndexQuickListAdapter(this, index);
         indexList.setAdapter(index_adapter);
       	
+        // creates list under notifications
         final ListView notificationsList = (ListView) findViewById(R.id.notification_items);
         Encounter[] e = {encounters[0],encounters[1],encounters[2]};
         final NotificationQuickListAdapter notification_adapter = new NotificationQuickListAdapter(this, e);
         notificationsList.setAdapter(notification_adapter);
         
+        // creates map
         final ImageView mainMenuMap = (ImageView) findViewById(R.id.map_image);
       	mainMenuMap.setOnClickListener(new OnClickListener() {
 			@Override
@@ -98,12 +102,21 @@ public class MenuActivity extends Activity {
 		    	MenuActivity.this.startActivity(myIntent);
 			}
 		});
-      	
+      	// Links the item button to the item activity
       	final Button mainMenuItems = (Button) findViewById(R.id.items_link);
       	mainMenuItems.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				Intent myIntent = new Intent(MenuActivity.this, ItemsActivity.class);
+		    	MenuActivity.this.startActivity(myIntent);
+			}
+		});
+     // Links the monster deck button to the monsterdeck activity
+      	final Button mainMenuMonsterdeck = (Button) findViewById(R.id.monster_deck);
+      	mainMenuMonsterdeck.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Intent myIntent = new Intent(MenuActivity.this, Monsterdeck.class);
 		    	MenuActivity.this.startActivity(myIntent);
 			}
 		});
