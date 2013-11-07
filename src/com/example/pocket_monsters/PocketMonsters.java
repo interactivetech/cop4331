@@ -1,11 +1,8 @@
 package com.example.pocket_monsters;
 
-import com.example.pocket_monsters.LoginActivity.Debug;
-
 import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 
 public class PocketMonsters extends Application{
 	

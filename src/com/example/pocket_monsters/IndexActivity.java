@@ -1,12 +1,8 @@
 package com.example.pocket_monsters;
 
-import com.example.pocket_monsters.ItemsActivity.ItemListAdapter;
-import com.example.pocket_monsters.LoginActivity.Debug;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -14,10 +10,10 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.View.OnTouchListener;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -31,30 +27,52 @@ public class IndexActivity extends Activity{
 		super.onCreate(savedInstanceState);
 		
 		localData = ((PocketMonsters) getApplication()).getDB();
-	    Cursor cursor = localData.select(false, new String[]{"monster_id","name","image","description","attack"},
-	    								"monsters", null, null, null, null, null, null);
-	        
+        Cursor cursor = localData.select(false, new String[]{"monster_id","name","image","bio","location","level","exp","maxhp","curhp","str","agi","arm"},
+				"monsters", null, null, null, null, null, null);
+        
         int monster_count = cursor.getCount();
         Monster[] index = new Monster[monster_count];
         int i = 0;
         while( cursor.moveToNext() ){
-        	int id_index = cursor.getColumnIndexOrThrow("monster_id");
-    		String monster_id = cursor.getString(id_index);
+           	int id_index = cursor.getColumnIndexOrThrow("monster_id");
+        	String monster_id = cursor.getString(id_index);
+        			
+    		int name_index = cursor.getColumnIndexOrThrow("name");
+    		String name = cursor.getString(name_index);
     			
-			int name_index = cursor.getColumnIndexOrThrow("name");
-			String name = cursor.getString(name_index);
-			
-			int image_index = cursor.getColumnIndexOrThrow("image");
-			String image = cursor.getString(image_index);
-			
-    		int description_index = cursor.getColumnIndexOrThrow("description");
-    		String description = cursor.getString(description_index);
-			
-			int attack_index = cursor.getColumnIndexOrThrow("attack");
-			String attack = cursor.getString(attack_index);
-			
-			index[i] = new Monster(Integer.parseInt(monster_id), name, image, description, attack); 
-			i++;
+    		int image_index = cursor.getColumnIndexOrThrow("image");
+    		String image = cursor.getString(image_index);
+    			
+        	int bio_index = cursor.getColumnIndexOrThrow("bio");
+        	String bio = cursor.getString(bio_index);
+    			
+    		int location_index = cursor.getColumnIndexOrThrow("location");
+    		String location = cursor.getString(location_index);
+    		
+    		int level_index = cursor.getColumnIndexOrThrow("level"); // "level","exp","maxhp","curhp","str","agi","arm"
+    		String level = cursor.getString(level_index);
+    			
+    		int exp_index = cursor.getColumnIndexOrThrow("exp");
+    		String exp = cursor.getString(exp_index);
+    			
+    		int maxhp_index = cursor.getColumnIndexOrThrow("maxhp");
+    		String maxhp = cursor.getString(maxhp_index);
+    			
+    		int curhp_index = cursor.getColumnIndexOrThrow("curhp");
+    		String curhp = cursor.getString(curhp_index);
+    			
+    		int str_index = cursor.getColumnIndexOrThrow("str");
+    		String str = cursor.getString(str_index);
+    			
+    		int agi_index = cursor.getColumnIndexOrThrow("agi");
+    		String agi = cursor.getString(agi_index);
+    			
+    		int arm_index = cursor.getColumnIndexOrThrow("arm");
+    		String arm = cursor.getString(arm_index);
+    			
+    		//(String name, String bio, String image, String location, int id, int level, int exp, int maxhp, int curhp, int str, int agi, int arm)
+    		index[i] = new Monster(name, bio, image, location, Integer.parseInt(monster_id), Integer.parseInt(level), Integer.parseInt(exp), Integer.parseInt(maxhp), Integer.parseInt(curhp), Integer.parseInt(str), Integer.parseInt(agi), Integer.parseInt(arm)); 
+    		i++;
 		}
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);

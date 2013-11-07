@@ -52,6 +52,10 @@
             android:name="com.example.pocket_monsters.InfoActivity"
             android:label="items">
         </activity>
+         <activity
+            android:name="com.example.pocket_monsters.Monsterdeck"
+            android:label="monsters">
+        </activity>
     </application>
 
 </manifest>

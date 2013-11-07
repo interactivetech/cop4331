@@ -1,12 +1,9 @@
 package com.example.pocket_monsters;
 
-import com.example.pocket_monsters.LoginActivity.Debug;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class LocalDatabaseOpenHelper extends SQLiteOpenHelper {
@@ -23,13 +20,37 @@ public class LocalDatabaseOpenHelper extends SQLiteOpenHelper {
 		new String[]{"description","TEXT"},
 		new String[]{"effect","TEXT"}
 	};
-	private static final String MONSTER_TABLE_NAME = "monsters";
+	private static final String MONSTER_TABLE_NAME = "monsters"; //captured monsters
 	private static final String[][] MONSTER_ATTRIBUTES = {
 		new String[]{"monster_id","INTEGER PRIMARY KEY"},
 		new String[]{"name","TEXT"},
 		new String[]{"image","TEXT"},
-		new String[]{"description","TEXT"},
-		new String[]{"attack","TEXT"}
+		new String[]{"bio","TEXT"},
+		new String[]{"location","TEXT"},
+		new String[]{"level","INTEGER"},
+		new String[]{"exp","INTEGER"},
+		new String[]{"maxhp","INTEGER"},
+		new String[]{"curhp","INTEGER"},
+		new String[]{"str","INTEGER"},
+		new String[]{"agi","INTEGER"},
+		new String[]{"arm","INTEGER"}
+	};
+//	public String name, bio, image, location;
+	//public int id, level, exp, maxhp, curhp, str, agi, arm,
+	private static final String MONSTERDECK_TABLE_NAME = "monsterdeck"; // monster deck
+	private static final String[][] MONSTERDECK_ATTRIBUTES = {
+		new String[]{"monster_id","INTEGER PRIMARY KEY"},
+		new String[]{"name","TEXT"},
+		new String[]{"image","TEXT"},
+		new String[]{"bio","TEXT"},
+		new String[]{"location","TEXT"},
+		new String[]{"level","INTEGER"},
+		new String[]{"exp","INTEGER"},
+		new String[]{"maxhp","INTEGER"},
+		new String[]{"curhp","INTEGER"},
+		new String[]{"str","INTEGER"},
+		new String[]{"agi","INTEGER"},
+		new String[]{"arm","INTEGER"}
 	};
 	private static final String ENCOUNTER_TABLE_NAME = "encounters";
 	private static final String[][] ENCOUNTER_ATTRIBUTES = {
@@ -55,6 +76,7 @@ public class LocalDatabaseOpenHelper extends SQLiteOpenHelper {
 		createDatabase(db, ENCOUNTER_TABLE_NAME);
 	    createDatabase(db, MONSTER_TABLE_NAME);
 	    createDatabase(db, LOCATION_TABLE_NAME);
+	    createDatabase(db, MONSTERDECK_TABLE_NAME);
 	}
 
 	public void createDatabase(SQLiteDatabase db, String table_name){
@@ -72,6 +94,9 @@ public class LocalDatabaseOpenHelper extends SQLiteOpenHelper {
 
 	    else if( table_name.compareTo("locations") == 0){
 	    	attribute_array = LOCATION_ATTRIBUTES;
+	    }
+	    else if( table_name.compareTo("monsterdeck") == 0){
+	    	attribute_array = MONSTERDECK_ATTRIBUTES;
 	    }
 	     
 	    String create_sql = "CREATE TABLE " + table_name + " (";
@@ -118,10 +143,12 @@ public class LocalDatabaseOpenHelper extends SQLiteOpenHelper {
 	    db.execSQL("DROP TABLE IF EXISTS '" + ENCOUNTER_TABLE_NAME + "';");
 	    db.execSQL("DROP TABLE IF EXISTS '" + MONSTER_TABLE_NAME + "';");
 	    db.execSQL("DROP TABLE IF EXISTS '" + LOCATION_TABLE_NAME + "';");
+	    db.execSQL("DROP TABLE IF EXISTS '" + MONSTERDECK_TABLE_NAME + "';");
 	    createDatabase(db, ITEM_TABLE_NAME);
 	    createDatabase(db, ENCOUNTER_TABLE_NAME);
 	    createDatabase(db, MONSTER_TABLE_NAME);
 	    createDatabase(db, LOCATION_TABLE_NAME);
+	    createDatabase(db, MONSTERDECK_TABLE_NAME);
 	}
 
 }

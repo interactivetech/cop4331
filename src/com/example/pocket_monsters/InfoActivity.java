@@ -1,11 +1,7 @@
 package com.example.pocket_monsters;
 
-import com.example.pocket_monsters.LoginActivity.Debug;
-
 import android.app.Activity;
-import android.content.Context;
 import android.content.pm.ActivityInfo;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
