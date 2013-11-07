@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -20,22 +21,37 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 public class ItemsActivity extends Activity{
+	public static LocalDatabaseOpenHelper localData;
+	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
     	
-		SharedPreferences pref = getApplication().getSharedPreferences("pref",0); 
-        String item_dump = pref.getString("item", "not found");
-        String[] item_array = item_dump.split(";");
-        
-        Item[] inventory = new Item[item_array.length];
+		localData = ((PocketMonsters) getApplication()).getDB();
+        Cursor cursor = localData.select(false, new String[]{"item_id","name","image","description","effect"},
+				"items", null, null, null, null, null, null);
+        int item_count = cursor.getCount();
+        Item[] inventory = new Item[item_count];
         int i = 0;
-        for( String each_item : item_array ){
-        	String[] attributes = each_item.split(",");
-        	inventory[i] = new Item(Integer.parseInt(attributes[0]),
-        			attributes[1],attributes[2],attributes[3]);
-        	i++;
-        }
-        
+        while( cursor.moveToNext() ){
+        	int item_index = cursor.getColumnIndexOrThrow("item_id");
+			String item_id = cursor.getString(item_index);
+			
+			int name_index = cursor.getColumnIndexOrThrow("name");
+    		String name = cursor.getString(name_index);
+    		
+    		int image_index = cursor.getColumnIndexOrThrow("image");
+    		String image = cursor.getString(image_index);
+    		
+    		int description_index = cursor.getColumnIndexOrThrow("description");
+    		String description = cursor.getString(description_index);
+			
+			int effect_index = cursor.getColumnIndexOrThrow("effect");
+			String effect = cursor.getString(effect_index);
+			
+			inventory[i] = new Item(Integer.parseInt(item_id), name, image, description, effect); 
+			i++;
+		}
+
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -94,8 +110,38 @@ public class ItemsActivity extends Activity{
 	    		            break;
 	    		        case MotionEvent.ACTION_UP:
 	    		        	((View) v.getParent()).setBackgroundColor(getResources().getColor(R.color.black_overlay));
+	    		        	
+	    		        	String item_name = (String) ((TextView) v).getText();
+	    		        	Cursor cursor = localData.select(false, new String[]{"item_id","image","description","effect"},
+    								"items", "name=?", new String[]{item_name}, 
+    								null, null, null, null);
+	    		        	
+	    		        	String[] attribute_array = new String[5];
+	    		        	while( cursor.moveToNext() ){
+	    		        		int item_id_index = cursor.getColumnIndexOrThrow("item_id");
+	    		        		String item_id = cursor.getString(item_id_index);
+	    		        		attribute_array[0] = item_id;
+	    		        		
+	    		        		attribute_array[1] = item_name;
+	    		        		
+	    		        		int image_index = cursor.getColumnIndexOrThrow("image");
+	    		        		String image = cursor.getString(image_index);
+	    		        		attribute_array[2] = image;
+	    		        				
+	    		        		int description_index = cursor.getColumnIndexOrThrow("description");
+	    		        		String description = cursor.getString(description_index);
+	    		        		attribute_array[3] = description;
+	    		        		
+	    		        		int attack_index = cursor.getColumnIndexOrThrow("effect");
+	    		        		String attack = cursor.getString(attack_index);
+	    		        		attribute_array[3] = attack;
+	    		        	}
+	    		        	
 	    		        	Intent myIntent = new Intent(v.getContext(), InfoActivity.class);
-	    		        	startActivity(myIntent);
+	    		        	myIntent.putExtra("type","items");
+	    		        	myIntent.putExtra("attributes", attribute_array);
+    		        		startActivity(myIntent);
+	    		        	
 	    		        	break;
 	    		        case MotionEvent.ACTION_MOVE:
 	    		        case MotionEvent.ACTION_CANCEL:

@@ -1,10 +1,13 @@
 package com.example.pocket_monsters;
 
+import com.example.pocket_monsters.LoginActivity.Debug;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -12,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.widget.BaseAdapter;
 import android.widget.Button;
@@ -19,33 +23,35 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 public class EncountersActivity extends Activity{
+	public static LocalDatabaseOpenHelper localData;
+	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		SharedPreferences pref = getApplication().getSharedPreferences("pref",0); 
-		String monster_dump = pref.getString("monster", "not found");
-        String[] monster_array = monster_dump.split(";");
+        localData = ((PocketMonsters) getApplication()).getDB();
+        Cursor cursor = localData.select(false, new String[]{"encounter_id","location_id","monster_id","monster_lvl"},
+				"encounters", null, null, null, null, null, null);
         
-        Monster[] index = new Monster[monster_array.length];
+        int encounter_count = cursor.getCount();
+        Encounter[] encounters = new Encounter[encounter_count];
         int i = 0;
-        for( String each_item : monster_array ){
-        	String[] attributes = each_item.split(",");
-        	index[i] = new Monster(Integer.parseInt(attributes[0]),
-        			attributes[1],attributes[2],attributes[3],attributes[4]);
-        	i++;
-        }
-        
-		String encounter_dump = pref.getString("encounter", "not found");
-        String[] encounter_array = encounter_dump.split(";");
-        
-        Encounter[] encounters = new Encounter[encounter_array.length];
-        i = 0;
-        for( String each_encounter : encounter_array ){
-        	String[] attributes = each_encounter.split(",");
-        	encounters[i] = new Encounter(Integer.parseInt(attributes[0]),
-        			index[i].location,index[i].name,Integer.parseInt(attributes[3]),attributes[4]);
-        	i++;
-        }
+        while( cursor.moveToNext() ){
+        	int encounter_index = cursor.getColumnIndexOrThrow("encounter_id");
+			String encounter_id = cursor.getString(encounter_index);
+			
+			int location_index = cursor.getColumnIndexOrThrow("location_id");
+    		String location_id = cursor.getString(location_index);
+    		
+    		int monster_index = cursor.getColumnIndexOrThrow("monster_id");
+    		String monster_id = cursor.getString(monster_index);
+			
+			int level_index = cursor.getColumnIndexOrThrow("monster_lvl");
+			String monster_lvl = cursor.getString(level_index);
+			
+			encounters[i] = new Encounter(Integer.parseInt(encounter_id), Integer.parseInt(location_id),
+										Integer.parseInt(monster_id), Integer.parseInt(monster_lvl)); 
+			i++;
+		}
         
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -53,9 +59,9 @@ public class EncountersActivity extends Activity{
     	getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, 
                              WindowManager.LayoutParams.FLAG_FULLSCREEN);
     	
-    	setContentView(R.layout.activity_notifications);
+    	setContentView(R.layout.activity_encounters);
     	
-    	final ListView EncountersList = (ListView) findViewById(R.id.notificationList);
+    	final ListView EncountersList = (ListView) findViewById(R.id.encountersList);
         final NotificationListAdapter adapter = new NotificationListAdapter(this, encounters);
         EncountersList.setAdapter(adapter);
 	}
@@ -87,13 +93,32 @@ public class EncountersActivity extends Activity{
     	}
     	
     	@Override
-    	public View getView(int position, View convertView, ViewGroup parent ){
+    	public View getView(final int position, View convertView, ViewGroup parent ){
     		View view = convertView;
     		if (view == null){
     			view = inflater.inflate(R.layout.encounters_list_item, null);
     		}
     		TextView text = (TextView) view.findViewById(R.id.encounter_name);
-    		text.setText(encounters[position].monster+" lvl:"+encounters[position].monster_level+" at "+encounters[position].location);
+    		
+    		int monster_id = encounters[position].monster_id;
+    		String monster_name = "";
+    		Cursor cursor = localData.select(false, new String[]{"name"},
+    				"monsters", "monster_id =?", new String[]{""+monster_id}, null, null, null, null);
+    		while( cursor.moveToNext() ){
+	        	int monster_index = cursor.getColumnIndexOrThrow("name");
+				monster_name = cursor.getString(monster_index);
+    		}
+    		
+    		int location_id = encounters[position].location_id;
+    		String location_name = "";
+    		cursor = localData.select(false, new String[]{"name"},
+    				"locations", "location_id =?", new String[]{""+location_id}, null, null, null, null);
+    		while( cursor.moveToNext() ){
+	        	int location_index = cursor.getColumnIndexOrThrow("name");
+				location_name = cursor.getString(location_index);
+    		}
+    		
+    		text.setText(monster_name+" lvl:"+encounters[position].monster_level+" at "+location_name);
     		
     		text.setOnTouchListener(new OnTouchListener() {
     			@Override
@@ -104,8 +129,6 @@ public class EncountersActivity extends Activity{
 	    		            break;
 	    		        case MotionEvent.ACTION_UP:
 	    		        	((View) v.getParent()).setBackgroundColor(getResources().getColor(R.color.black_overlay));
-	    		        	Intent myIntent = new Intent(v.getContext(), GameActivity.class);
-    		        		startActivity(myIntent);
     		        		break;
 	    		        case MotionEvent.ACTION_MOVE:
 	    		        case MotionEvent.ACTION_CANCEL:
@@ -114,6 +137,26 @@ public class EncountersActivity extends Activity{
     		        }
     		        return true;
     		    }
+    		});
+    		
+    		Button fight = (Button) view.findViewById(R.id.encounter_fight);
+          	fight.setOnClickListener(new OnClickListener() {
+    			@Override
+    			public void onClick(View view) {
+    				Intent myIntent = new Intent(view.getContext(), GameActivity.class);
+    				startActivity(myIntent);
+    			}
+    		});
+          	
+          	Button run = (Button) view.findViewById(R.id.encounter_run);
+          	run.setOnClickListener(new OnClickListener() {
+    			@Override
+    			public void onClick(View view) {
+    				localData.delete("encounters", "encounter_id = ?", new String[]{""+encounters[position].id});
+    				EncountersActivity.this.finish();
+    				Intent myIntent = new Intent(view.getContext(), EncountersActivity.class);
+    				startActivity(myIntent);
+    			}
     		});
     		
     		return view;

@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -26,36 +27,69 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 public class MenuActivity extends Activity {
+	public static LocalDatabaseOpenHelper localData;
+
+	/*
+	protected void onResume() {
+		super.onResume();
+		
+	}
+	*/
+	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
-		SharedPreferences pref = getApplication().getSharedPreferences("pref",0); 
-        String monster_dump = pref.getString("monster", "not found");
-        String[] monster_array = monster_dump.split(";");
         
-        Monster[] index = new Monster[monster_array.length];
+		localData = ((PocketMonsters) getApplication()).getDB();
+        Cursor cursor = localData.select(false, new String[]{"monster_id","name","image","description","attack"},
+				"monsters", null, null, null, null, null, null);
+        
+        int monster_count = cursor.getCount();
+        Monster[] index = new Monster[monster_count];
         int i = 0;
-        for( String each_item : monster_array ){
-        	String[] attributes = each_item.split(",");
-        	index[i] = new Monster(Integer.parseInt(attributes[0]),
-        			attributes[1],attributes[2],attributes[3],attributes[4]);
-        	i++;
-        }
-        
-        String encounter_dump = pref.getString("encounter", "not found");
-        String[] encounter_array = encounter_dump.split(";");
-        
-        Encounter[] encounters = new Encounter[encounter_array.length];
+        while( cursor.moveToNext() ){
+        	int id_index = cursor.getColumnIndexOrThrow("monster_id");
+    		String monster_id = cursor.getString(id_index);
+    			
+			int name_index = cursor.getColumnIndexOrThrow("name");
+			String name = cursor.getString(name_index);
+			
+			int image_index = cursor.getColumnIndexOrThrow("image");
+			String image = cursor.getString(image_index);
+			
+			int description_index = cursor.getColumnIndexOrThrow("description");
+			String description = cursor.getString(description_index);
+			
+			int attack_index = cursor.getColumnIndexOrThrow("attack");
+			String attack = cursor.getString(attack_index);
+			
+			index[i] = new Monster(Integer.parseInt(monster_id), name, description, image, attack); 
+			i++;
+		}
+
+        cursor = localData.select(false, new String[]{"encounter_id","location_id","monster_id","monster_lvl"},
+				"encounters", null, null, null, null, null, "3");
+        int encounter_count = cursor.getCount();
+        Encounter[] encounters = new Encounter[encounter_count];
         i = 0;
-        for( String each_encounter : encounter_array ){
-        	String[] attributes = each_encounter.split(",");
-        	encounters[i] = new Encounter(Integer.parseInt(attributes[0]),
-        			index[i].location,index[i].name,
-        			Integer.parseInt(attributes[3]),attributes[4]);
-        	i++;
-        }
-		
-		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        while( cursor.moveToNext() ){
+        	int encounter_index = cursor.getColumnIndexOrThrow("encounter_id");
+			String encounter_id = cursor.getString(encounter_index);
+			
+			int location_index = cursor.getColumnIndexOrThrow("location_id");
+    		String location_id = cursor.getString(location_index);
+    		
+    		int monster_index = cursor.getColumnIndexOrThrow("monster_id");
+    		String monster_id = cursor.getString(monster_index);
+			
+			int level_index = cursor.getColumnIndexOrThrow("monster_lvl");
+			String monster_lvl = cursor.getString(level_index);
+			
+			encounters[i] = new Encounter(Integer.parseInt(encounter_id), Integer.parseInt(location_id),
+										Integer.parseInt(monster_id), Integer.parseInt(monster_lvl)); 
+			i++;
+		}
+
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
     	getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, 
@@ -67,11 +101,10 @@ public class MenuActivity extends Activity {
         final IndexQuickListAdapter index_adapter = new IndexQuickListAdapter(this, index);
         indexList.setAdapter(index_adapter);
       	
-        final ListView notificationsList = (ListView) findViewById(R.id.notification_items);
-        Encounter[] e = {encounters[0],encounters[1],encounters[2]};
-        final NotificationQuickListAdapter notification_adapter = new NotificationQuickListAdapter(this, e);
-        notificationsList.setAdapter(notification_adapter);
-        
+        final ListView notificationsList = (ListView) findViewById(R.id.encounter_items);
+        final NotificationQuickListAdapter notification_adapter = new NotificationQuickListAdapter(this, encounters);
+        notificationsList.setAdapter(notification_adapter);		
+	
         final ImageView mainMenuMap = (ImageView) findViewById(R.id.map_image);
       	mainMenuMap.setOnClickListener(new OnClickListener() {
 			@Override
@@ -81,7 +114,7 @@ public class MenuActivity extends Activity {
 			}
 		});
 
-      	final TextView mainMenuNotifications = (TextView) findViewById(R.id.notifications_title);
+      	final TextView mainMenuNotifications = (TextView) findViewById(R.id.encounters_title);
       	mainMenuNotifications.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -107,7 +140,7 @@ public class MenuActivity extends Activity {
 		    	MenuActivity.this.startActivity(myIntent);
 			}
 		});
-	}
+    }
 	
 	public class IndexQuickListAdapter extends BaseAdapter{
     	Monster[] index;
@@ -202,7 +235,26 @@ public class MenuActivity extends Activity {
     			view = inflater.inflate(R.layout.encounter_quick_item, null);
     		}
     		TextView text = (TextView) view.findViewById(R.id.encounter_quick_name);
-    		text.setText(encounters[position].monster+" lvl:"+encounters[position].monster_level+" at "+encounters[position].location);
+    		
+    		int monster_id = encounters[position].monster_id;
+    		String monster_name = "";
+    		Cursor cursor = localData.select(false, new String[]{"name"},
+    				"monsters", "monster_id =?", new String[]{""+monster_id}, null, null, null, null);
+    		while( cursor.moveToNext() ){
+	        	int monster_index = cursor.getColumnIndexOrThrow("name");
+				monster_name = cursor.getString(monster_index);
+    		}
+    		
+    		int location_id = encounters[position].location_id;
+    		String location_name = "";
+    		cursor = localData.select(false, new String[]{"name"},
+    				"locations", "location_id =?", new String[]{""+location_id}, null, null, null, null);
+    		while( cursor.moveToNext() ){
+	        	int location_index = cursor.getColumnIndexOrThrow("name");
+				location_name = cursor.getString(location_index);
+    		}
+    		
+    		text.setText(monster_name+" lvl:"+encounters[position].monster_level+" at "+location_name);
     		
     		text.setOnTouchListener(new OnTouchListener() {
     			@Override

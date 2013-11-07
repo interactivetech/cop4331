@@ -25,4 +25,5 @@
     <string name="stats">Stats</string>
     <string name="description">Description</string>
     <string name="info_image">Image</string>
+    <string name="fight">Fight</string>
 </resources>

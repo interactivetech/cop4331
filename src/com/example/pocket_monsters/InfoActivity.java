@@ -5,10 +5,12 @@ import com.example.pocket_monsters.LoginActivity.Debug;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class InfoActivity extends Activity{
 	protected void onCreate(Bundle savedInstanceState) {
@@ -22,11 +24,20 @@ public class InfoActivity extends Activity{
     	
     	setContentView(R.layout.activity_info);
     	
-    	String img_path = (String) getIntent().getExtras().get("monster_img");
-    	int image_id = InfoActivity.this.getApplicationContext().getResources().getIdentifier("drawable/"+img_path, null, getPackageName()); 
-    	Debug.out(img_path+" = "+image_id);
+    	String type = (String) getIntent().getExtras().get("type");
+    	String[] attributes = (String[]) getIntent().getExtras().get("attributes");
     	
+    	String id = attributes[0];
+    	String name = attributes[1];
+    	String image = attributes[2];
+    	//need to generalize for items and monsters
+    	String stats = attributes[3];
+    	
+	    int image_id = InfoActivity.this.getApplicationContext().getResources().getIdentifier("drawable/"+image, null, getPackageName()); 
     	ImageView info_image = (ImageView) findViewById(R.id.info_image);
         info_image.setImageResource(image_id);
+
+        TextView title = (TextView) findViewById(R.id.title);
+        title.setText(id+" "+name);
 	}
 }
