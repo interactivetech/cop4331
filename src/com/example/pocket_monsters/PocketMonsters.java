@@ -1,12 +1,16 @@
 package com.example.pocket_monsters;
 
+import com.example.pocket_monsters.LoginActivity.Debug;
+
 import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 
 public class PocketMonsters extends Application{
 	
 	public SharedPreferences preferences; 
+	public static LocalDatabaseOpenHelper db_helper;
 	
 	private static PocketMonsters singleton;
 	
@@ -14,52 +18,43 @@ public class PocketMonsters extends Application{
 		return singleton;
 	}
 	
+	public LocalDatabaseOpenHelper getDB(){
+		return db_helper;
+	}
+	
 	@SuppressLint("CommitPrefEdits")
 	public final void onCreate(){
 		super.onCreate();
-		preferences = getSharedPreferences("pref",0);
-		SharedPreferences.Editor editor = preferences.edit();
 		
-		String items = "";
-		int item_num = 8;
-		for( int i=1; i<=item_num; i++){
-			items += i + ",item"+i +",description"+i + ",effect"+i+";";
-		}
-		editor.putString("item", items);
+		db_helper = new LocalDatabaseOpenHelper(this);
 		
-		String monsters = "1,monster1,location1,monsters1,attack;"
-						+ "2,monster2,location2,monsters5,attack;"
-						+ "3,monster3,location3,monsters10,attack;"
-						+ "4,monster4,location4,monsters1,attack;"
-						+ "5,monster5,location5,monsters5,attack;"
-						+ "6,monster6,location6,monsters10,attack;"
-						+ "7,monster7,location7,monsters1,attack;"
-						+ "8,monster8,location8,monsters5,attack;"
-						+ "9,monster9,location9,monsters10,attack;"
-						+ "10,monster10,location10,monsters1,attack;";
-		editor.putString("monster", monsters);
-		
-		String[] monster_array = monsters.split(";");
-		Monster[] monster_index = new Monster[monster_array.length];
-		int monster_num = 0;
-		for( String each_monster : monster_array ){
-			String[] attributes = each_monster.split(",");
-			monster_index[monster_num] = new Monster(
-					Integer.parseInt(attributes[0]),
-					attributes[1],attributes[2],attributes[3],attributes[4]);
-			monster_num++;
+		int location_num = 4;
+		for( int i = 1; i <= location_num; i++){
+			db_helper.insert("locations", new String[]{"location_id","name","coordinates"}, 
+							new String[]{""+i,"location"+i,"coordinates"+i});
 		}
 		
-		String encounters = "";
+		int monster_num = 9;
+		for( int i = 1; i <= monster_num; i++){
+			db_helper.insert("monsters", new String[]{"monster_id","name","image","attack"}, 
+							new String[]{""+i,"monster"+i,"monsters"+((i%3)*5),"attack"+i});
+		}
+		
 		int encounter_num = 5;
-		int mod_num = monster_array.length;
-		for( int i=1; i<=encounter_num; i++){
-			int level = (int) (5 + (Math.random() * (20 - 5)));
-			encounters += i + ","+i + ","+i%mod_num +","+level + ","+monster_index[i%mod_num].image+";";
+		for( int i = 1; i <= encounter_num; i++){
+			int monster_id = (int) (Math.random()*(monster_num))+1;
+			int location_id = (int) (Math.random()*(location_num))+1;
+			int monster_lvl = (int) Math.random()*(20-5);
+			db_helper.insert("encounters", new String[]{"encounter_id","monster_id","location_id","monster_lvl"}, 
+												new String[]{""+i,""+monster_id,""+location_id,""+monster_lvl});
 		}
-		editor.putString("encounter", encounters);
 		
-		editor.commit();
+		int item_num = 8;
+		for( int i = 1; i <= item_num; i++){
+			db_helper.insert("items", new String[]{"item_id","name","description","image","effect"}, 
+							new String[]{""+i,"item"+i,"description"+i,"map","effect"+i});
+		}
+		
 		singleton = this;
 	}
 }

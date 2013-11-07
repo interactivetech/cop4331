@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:background="#0099cc">	
    	<ListView
-        android:id="@+id/notificationList"
+        android:id="@+id/encountersList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="20dp"
