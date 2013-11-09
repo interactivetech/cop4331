@@ -104,6 +104,19 @@ public class LocalDatabaseOpenHelper extends SQLiteOpenHelper {
 	    return cursor;
 	}
 	
+	public int update(String table, String[] columns, String[] values, String whereClause, String[] whereArgs){
+		//Debug.out("update");
+		SQLiteDatabase write_db = this.getWritableDatabase();
+		
+		ContentValues updatedValues = new ContentValues();
+		int array_length = columns.length;
+		for( int i = 0; i < array_length; i++){
+			updatedValues.put(columns[i], values[i]);
+		}
+		
+		return write_db.update(table, udpatedValues, whereClause, whereArgs);
+	}
+	
 	public int delete(String table, String whereClause, String[] whereArgs){
 		SQLiteDatabase read_db = this.getReadableDatabase();
 		
