@@ -10,6 +10,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 public class LoginActivity extends Activity {
 	
@@ -29,8 +31,15 @@ public class LoginActivity extends Activity {
       	mainMenuItems.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				Intent myIntent = new Intent(LoginActivity.this, MenuActivity.class);
-		    	LoginActivity.this.startActivity(myIntent);
+				String username = ((EditText) findViewById(R.id.usernameInput)).getText().toString();
+				String password = ((EditText) findViewById(R.id.passwordInput)).getText().toString();
+				
+				DatabaseConnection db_connection = ((PocketMonsters) getApplication()).getConnection();
+				
+				if(db_connection.login(username,password)){
+					Intent myIntent = new Intent(LoginActivity.this, MenuActivity.class);
+					LoginActivity.this.startActivity(myIntent);
+				}
 			}
 		});
       	 

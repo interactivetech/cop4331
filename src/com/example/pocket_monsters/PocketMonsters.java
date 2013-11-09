@@ -11,6 +11,7 @@ public class PocketMonsters extends Application{
 	
 	public SharedPreferences preferences; 
 	public static LocalDatabaseOpenHelper db_helper;
+	public static DatabaseConnection db_connection;
 	
 	public static Monster[] index;
 	public static Encounter[] encounters;
@@ -20,6 +21,11 @@ public class PocketMonsters extends Application{
 	
 	public static PocketMonsters getInstance(){
 		return singleton;
+	}
+	
+
+	public DatabaseConnection getConnection() {
+		return db_connection;
 	}
 	
 	public LocalDatabaseOpenHelper getDB(){
@@ -78,9 +84,6 @@ public class PocketMonsters extends Application{
 		encounters = Encounter.fetchEncounters(db_helper);
 		inventory = Item.fetchItems(db_helper);
 		
-		DatabaseConnection db_connection = new DatabaseConnection();
-		db_connection.connect();
-		Debug.out("should print something");
-		
+		db_connection = new DatabaseConnection();
 	}
 }

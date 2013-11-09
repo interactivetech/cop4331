@@ -34,8 +34,6 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     }
     public static final class id {
         public static final int description=0x7f070009;
-        public static final int editText1=0x7f07000d;
-        public static final int editText2=0x7f07000f;
         public static final int encounter_fight=0x7f07001d;
         public static final int encounter_items=0x7f070017;
         public static final int encounter_lock=0x7f07001e;
@@ -69,10 +67,12 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int monster_order=0x7f070023;
         public static final int owned=0x7f070003;
         public static final int owned_widget=0x7f070004;
+        public static final int passwordInput=0x7f07000f;
         public static final int stats=0x7f070008;
         public static final int textView1=0x7f07000c;
         public static final int textView2=0x7f07000e;
         public static final int title=0x7f070007;
+        public static final int usernameInput=0x7f07000d;
     }
     public static final class layout {
         public static final int activity_encounters=0x7f030000;
