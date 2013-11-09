@@ -1,11 +1,11 @@
 package com.example.pocket_monsters;
 
-import com.example.pocket_monsters.LoginActivity.Debug;
+//import com.example.pocket_monsters.LoginActivity.Debug;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
+//import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.os.Bundle;

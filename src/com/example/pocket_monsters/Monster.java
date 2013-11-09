@@ -15,38 +15,17 @@ public class Monster {
 		this.description = description;
 		this.attacks = attack;
 	}
-}	
-*/
+}	*/
+
+
+
 package com.example.pocket_monsters;
-
-/*
- package com.example.pocket_monsters;
-
-public class Monster {
-	int id;
-	String name;
-	String location;
-	String image;
-	String attacks;
-	
-	
-	public Monster(int id, String name, String location, String image, String attack){
-		this.id = id;
-		this.name = name;
-		this.location = location;
-		this.image = image;
-		this.attacks = attack;
-	}
-}	
-
- */
-
 import java.util.Random;
 //must call tempSet() when encounter starts or ends to set/reset temporary stats equal to normal stats
 public class Monster {
 public String name, bio, image, location;
 public int id, level, exp, maxhp, curhp, str, agi, arm, tempstr, tempagi, temparm;
-public boolean active; // 1 = in monsterdeck   0 = inactive
+public int active; // 1 = in monsterdeck   0 = inactive
 //id = monster's number
 //level = current level
 //exp = current experience points once it reaches 500 + 500 * level reset and level up pokemon and increase stats
@@ -62,7 +41,7 @@ public boolean active; // 1 = in monsterdeck   0 = inactive
 // location = location of the monster
 
 //class constructor
-	public Monster (String name, String bio, String image, int id, int level, int exp, int maxhp, int curhp, int str, int agi, int arm) {
+	public Monster (String name, String bio, String image, String location, int id, int level, int exp, int maxhp, int curhp, int str, int agi, int arm, int active) {
 		this.name = name;
 		this.id = id;
 		this.bio = bio;
@@ -78,6 +57,7 @@ public boolean active; // 1 = in monsterdeck   0 = inactive
 		this.tempagi = agi;
 		this.temparm = arm;
 		this.location = location;
+		this.active = active;
 	
 	}
 	

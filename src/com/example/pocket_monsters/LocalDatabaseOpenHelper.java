@@ -1,12 +1,9 @@
 package com.example.pocket_monsters;
 
-import com.example.pocket_monsters.LoginActivity.Debug;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class LocalDatabaseOpenHelper extends SQLiteOpenHelper {
@@ -29,7 +26,15 @@ public class LocalDatabaseOpenHelper extends SQLiteOpenHelper {
 		new String[]{"name","TEXT"},
 		new String[]{"image","TEXT"},
 		new String[]{"description","TEXT"},
-		new String[]{"attack","TEXT"}
+		new String[]{"location","TEXT"},
+		new String[]{"level","INTEGER"},
+		new String[]{"exp","INTEGER"},
+		new String[]{"maxhp","INTEGER"},
+		new String[]{"curhp","INTEGER"},
+		new String[]{"str","INTEGER"},
+		new String[]{"agi","INTEGER"},
+		new String[]{"arm","INTEGER"},
+		//public Monster (String name, String bio, String image, String location, int id, int level, int exp, int maxhp, int curhp, int str, int agi, int arm)
 	};
 	private static final String ENCOUNTER_TABLE_NAME = "encounters";
 	private static final String[][] ENCOUNTER_ATTRIBUTES = {
