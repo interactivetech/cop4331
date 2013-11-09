@@ -114,7 +114,7 @@ public class LocalDatabaseOpenHelper extends SQLiteOpenHelper {
 			updatedValues.put(columns[i], values[i]);
 		}
 		
-		return write_db.update(table, udpatedValues, whereClause, whereArgs);
+		return write_db.update(table, updatedValues, whereClause, whereArgs);
 	}
 	
 	public int delete(String table, String whereClause, String[] whereArgs){
