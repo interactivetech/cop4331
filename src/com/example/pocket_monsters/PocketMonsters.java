@@ -12,6 +12,10 @@ public class PocketMonsters extends Application{
 	public SharedPreferences preferences; 
 	public static LocalDatabaseOpenHelper db_helper;
 	
+	public static Monster[] index;
+	public static Encounter[] encounters;
+	public static Item[] inventory;
+	
 	private static PocketMonsters singleton;
 	
 	public static PocketMonsters getInstance(){
@@ -20,6 +24,19 @@ public class PocketMonsters extends Application{
 	
 	public LocalDatabaseOpenHelper getDB(){
 		return db_helper;
+	}
+	
+	
+	public static Monster[] getIndex() {
+		return index;
+	}
+	
+	public static Encounter[] getEncounters() {
+		return encounters;
+	}
+	
+	public static Item[] getInventory() {
+		return inventory;
 	}
 	
 	@SuppressLint("CommitPrefEdits")
@@ -56,5 +73,13 @@ public class PocketMonsters extends Application{
 		}
 		
 		singleton = this;
+		
+		index = Monster.fetchMonsters(db_helper);
+		encounters = Encounter.fetchEncounters(db_helper);
+		inventory = Item.fetchItems(db_helper);
+		
+		DatabaseConnection db_connection = new DatabaseConnection();
+		db_connection.connect();
+		
 	}
 }

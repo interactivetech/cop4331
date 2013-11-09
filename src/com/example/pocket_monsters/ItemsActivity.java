@@ -27,30 +27,7 @@ public class ItemsActivity extends Activity{
 		super.onCreate(savedInstanceState);
     	
 		localData = ((PocketMonsters) getApplication()).getDB();
-        Cursor cursor = localData.select(false, new String[]{"item_id","name","image","description","effect"},
-				"items", null, null, null, null, null, null);
-        int item_count = cursor.getCount();
-        Item[] inventory = new Item[item_count];
-        int i = 0;
-        while( cursor.moveToNext() ){
-        	int item_index = cursor.getColumnIndexOrThrow("item_id");
-			String item_id = cursor.getString(item_index);
-			
-			int name_index = cursor.getColumnIndexOrThrow("name");
-    		String name = cursor.getString(name_index);
-    		
-    		int image_index = cursor.getColumnIndexOrThrow("image");
-    		String image = cursor.getString(image_index);
-    		
-    		int description_index = cursor.getColumnIndexOrThrow("description");
-    		String description = cursor.getString(description_index);
-			
-			int effect_index = cursor.getColumnIndexOrThrow("effect");
-			String effect = cursor.getString(effect_index);
-			
-			inventory[i] = new Item(Integer.parseInt(item_id), name, image, description, effect); 
-			i++;
-		}
+        Item[] inventory = ((PocketMonsters) getApplication()).getInventory();
 
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
