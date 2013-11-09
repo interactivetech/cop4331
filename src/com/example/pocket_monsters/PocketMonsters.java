@@ -80,6 +80,7 @@ public class PocketMonsters extends Application{
 		
 		DatabaseConnection db_connection = new DatabaseConnection();
 		db_connection.connect();
+		Debug.out("should print something");
 		
 	}
 }
