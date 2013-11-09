@@ -34,40 +34,44 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     }
     public static final class id {
         public static final int description=0x7f070009;
-        public static final int encounter_fight=0x7f070019;
-        public static final int encounter_items=0x7f070013;
-        public static final int encounter_lock=0x7f07001a;
-        public static final int encounter_name=0x7f070018;
-        public static final int encounter_quick_name=0x7f070017;
-        public static final int encounter_run=0x7f07001b;
-        public static final int encounters=0x7f070011;
+        public static final int editText1=0x7f07000d;
+        public static final int editText2=0x7f07000f;
+        public static final int encounter_fight=0x7f07001d;
+        public static final int encounter_items=0x7f070017;
+        public static final int encounter_lock=0x7f07001e;
+        public static final int encounter_name=0x7f07001c;
+        public static final int encounter_quick_name=0x7f07001b;
+        public static final int encounter_run=0x7f07001f;
+        public static final int encounters=0x7f070015;
         public static final int encountersList=0x7f070000;
-        public static final int encounters_title=0x7f070012;
+        public static final int encounters_title=0x7f070016;
         public static final int enemy=0x7f070002;
         public static final int enemy_widget=0x7f070001;
-        public static final int fullscreen_content_controls=0x7f070010;
-        public static final int index=0x7f070014;
+        public static final int fullscreen_content_controls=0x7f070014;
+        public static final int index=0x7f070018;
         public static final int indexList=0x7f070005;
-        public static final int index_items=0x7f070016;
-        public static final int index_quick_name=0x7f070020;
-        public static final int index_title=0x7f070015;
+        public static final int index_items=0x7f07001a;
+        public static final int index_quick_name=0x7f070024;
+        public static final int index_title=0x7f070019;
         public static final int info_image=0x7f070006;
         public static final int itemList=0x7f07000a;
-        public static final int item_drop=0x7f070023;
-        public static final int item_name=0x7f070021;
-        public static final int item_use=0x7f070022;
-        public static final int items_link=0x7f07000f;
-        public static final int login_btn=0x7f07000c;
+        public static final int item_drop=0x7f070027;
+        public static final int item_name=0x7f070025;
+        public static final int item_use=0x7f070026;
+        public static final int items_link=0x7f070013;
+        public static final int login_btn=0x7f070010;
         public static final int login_msg=0x7f07000b;
-        public static final int map=0x7f07000d;
-        public static final int map_image=0x7f07000e;
-        public static final int monster_activate=0x7f07001e;
-        public static final int monster_location=0x7f07001d;
-        public static final int monster_name=0x7f07001c;
-        public static final int monster_order=0x7f07001f;
+        public static final int map=0x7f070011;
+        public static final int map_image=0x7f070012;
+        public static final int monster_activate=0x7f070022;
+        public static final int monster_location=0x7f070021;
+        public static final int monster_name=0x7f070020;
+        public static final int monster_order=0x7f070023;
         public static final int owned=0x7f070003;
         public static final int owned_widget=0x7f070004;
         public static final int stats=0x7f070008;
+        public static final int textView1=0x7f07000c;
+        public static final int textView2=0x7f07000e;
         public static final int title=0x7f070007;
     }
     public static final class layout {
@@ -107,10 +111,12 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int menu_map=0x7f050007;
         public static final int notifications=0x7f050005;
         public static final int order=0x7f050012;
+        public static final int password=0x7f05001a;
         public static final int run=0x7f05000e;
         public static final int stats=0x7f050015;
         public static final int use=0x7f05000a;
         public static final int use_desc=0x7f05000b;
+        public static final int username=0x7f050019;
     }
     public static final class style {
         /** 

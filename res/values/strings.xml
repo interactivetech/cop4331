@@ -26,4 +26,6 @@
     <string name="description">Description</string>
     <string name="info_image">Image</string>
     <string name="fight">Fight</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
 </resources>
