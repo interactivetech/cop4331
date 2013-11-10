@@ -36,10 +36,10 @@ public class LoginActivity extends Activity {
 				
 				DatabaseConnection db_connection = ((PocketMonsters) getApplication()).getConnection();
 				
-				if(db_connection.login(username,password)){
+				//if(db_connection.login(username,password)){
 					Intent myIntent = new Intent(LoginActivity.this, MenuActivity.class);
 					LoginActivity.this.startActivity(myIntent);
-				}
+				//}
 			}
 		});
       	 

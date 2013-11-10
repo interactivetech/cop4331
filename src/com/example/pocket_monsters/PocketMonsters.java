@@ -59,9 +59,13 @@ public class PocketMonsters extends Application{
 		
 		int monster_num = 9;
 		for( int i = 1; i <= monster_num; i++){
-			db_helper.insert("monsters", new String[]{"monster_id","name","image","attack"}, 
-							new String[]{""+i,"monster"+i,"monsters"+((i%3)*5),"attack"+i});
+			//db_helper.insert("monsters", new String[]{"monster_id","name","image","attack"}, 
+					//		new String[]{""+i,"monster"+i,"monsters"+((i%3)*5),"attack"+i});
+			db_helper.insert("monsters", new String[]{"monster_id","name","image","description","location","level","exp","maxhp","curhp","str","agi","arm","active"},
+							new String[]{""+i,"monster"+i,"monsters"+((i%3)*5),"yo", "lol","1","0","20","20","5","5","5","0"});
 		}
+
+		
 		
 		int encounter_num = 5;
 		for( int i = 1; i <= encounter_num; i++){

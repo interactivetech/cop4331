@@ -23,13 +23,22 @@ public class LocalDatabaseOpenHelper extends SQLiteOpenHelper {
 		new String[]{"description","TEXT"},
 		new String[]{"effect","TEXT"}
 	};
-	private static final String MONSTER_TABLE_NAME = "monsters";
+	private static final String MONSTER_TABLE_NAME = "monsters"; // captured monsters
 	private static final String[][] MONSTER_ATTRIBUTES = {
 		new String[]{"monster_id","INTEGER PRIMARY KEY"},
 		new String[]{"name","TEXT"},
 		new String[]{"image","TEXT"},
 		new String[]{"description","TEXT"},
-		new String[]{"attack","TEXT"}
+		new String[]{"location","TEXT"},
+		new String[]{"level","INTEGER"},
+		new String[]{"exp","INTEGER"},
+		new String[]{"maxhp","INTEGER"},
+		new String[]{"curhp","INTEGER"},
+		new String[]{"str","INTEGER"},
+		new String[]{"agi","INTEGER"},
+		new String[]{"arm","INTEGER"},
+		new String[]{"active","INTEGER"},
+		//public Monster (String name, String bio, String image, String location, int id, int level, int exp, int maxhp, int curhp, int str, int agi, int arm)
 	};
 	private static final String ENCOUNTER_TABLE_NAME = "encounters";
 	private static final String[][] ENCOUNTER_ATTRIBUTES = {

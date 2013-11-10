@@ -31,31 +31,13 @@ public class IndexActivity extends Activity{
 		super.onCreate(savedInstanceState);
 		
 		localData = ((PocketMonsters) getApplication()).getDB();
-	    Cursor cursor = localData.select(false, new String[]{"monster_id","name","image","description","attack"},
+	    Cursor cursor = localData.select(false, new String[]{"monster_id","name","image","description","location","level","exp","maxhp","curhp","str","agi","arm","active"},
 	    								"monsters", null, null, null, null, null, null);
 	        
         int monster_count = cursor.getCount();
         Monster[] index = new Monster[monster_count];
-        int i = 0;
-        while( cursor.moveToNext() ){
-        	int id_index = cursor.getColumnIndexOrThrow("monster_id");
-    		String monster_id = cursor.getString(id_index);
-    			
-			int name_index = cursor.getColumnIndexOrThrow("name");
-			String name = cursor.getString(name_index);
-			
-			int image_index = cursor.getColumnIndexOrThrow("image");
-			String image = cursor.getString(image_index);
-			
-    		int description_index = cursor.getColumnIndexOrThrow("description");
-    		String description = cursor.getString(description_index);
-			
-			int attack_index = cursor.getColumnIndexOrThrow("attack");
-			String attack = cursor.getString(attack_index);
-			
-			index[i] = new Monster(Integer.parseInt(monster_id), name, image, description, attack); 
-			i++;
-		}
+        index = Monster.fetchMonsters(localData);
+        
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
