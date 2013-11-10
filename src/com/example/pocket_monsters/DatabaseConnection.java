@@ -3,6 +3,7 @@ package com.example.pocket_monsters;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class DatabaseConnection {
 		String s = "";
 		try {
 			httpClient = new DefaultHttpClient();
-			httpPost = new HttpPost("http://dainbramaged.me/php/"+path);
+			httpPost = new HttpPost("http://192.232.218.255:2222/php/"+path);
 			return 1;
 		} catch(Exception e){
 			Debug.out("Could not connect");
@@ -44,13 +45,16 @@ public class DatabaseConnection {
 				List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
 				nameValuePairs.add(new BasicNameValuePair("username",username));
 				nameValuePairs.add(new BasicNameValuePair("password",password));
+				
 				httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 				
 				HttpResponse response = httpClient.execute(httpPost);
+				
 				HttpEntity entity = response.getEntity();
 				stream = entity.getContent();
 			}catch(Exception e){
 				Debug.out("Could not post");
+				e.printStackTrace(System.out);
 			}
 			
 			try{

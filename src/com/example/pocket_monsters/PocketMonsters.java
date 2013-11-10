@@ -4,6 +4,7 @@ import com.example.pocket_monsters.LoginActivity.Debug;
 
 import android.annotation.SuppressLint;
 import android.app.Application;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 
@@ -85,5 +86,9 @@ public class PocketMonsters extends Application{
 		inventory = Item.fetchItems(db_helper);
 		
 		db_connection = new DatabaseConnection();
+		
+		Intent intent = new Intent(this, EncounterService.class);
+		startService(intent);
+		
 	}
 }
